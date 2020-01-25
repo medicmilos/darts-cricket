@@ -1,11 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 
-Vue.use(Vuex)
+const vuexLocalStorage = new VuexPersistence({
+    storage: window.localStorage
+});
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {},
-    mutations: {},
-    actions: {},
-    modules: {}
+    state: {
+        players: [],
+    },
+    mutations: {
+        setPlayers(state, payload) {
+            console.log("payload: ", payload);
+            state.players = payload;
+        }
+    },
+    actions: {
+        example({commit}, payload) {
+
+        },
+    },
+    plugins: [vuexLocalStorage.plugin],
 })
